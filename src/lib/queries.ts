@@ -106,7 +106,7 @@ export type BuildingSettings = {
   late_fee_grace_days: number;
 };
 
-const db = supabase as unknown as {
+export const db = supabase as unknown as {
   from: (table: string) => any;
 };
 
