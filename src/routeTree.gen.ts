@@ -20,6 +20,11 @@ import { Route as AuthenticatedRentRouteImport } from './routes/_authenticated/r
 import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedTenantsRouteImport } from './routes/_authenticated/tenants'
+import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal.index'
+import { Route as AuthenticatedPortalMaintenanceRouteImport } from './routes/_authenticated/portal.maintenance'
+import { Route as AuthenticatedPortalNoticesRouteImport } from './routes/_authenticated/portal.notices'
+import { Route as AuthenticatedPortalPaymentsRouteImport } from './routes/_authenticated/portal.payments'
+import { Route as AuthenticatedPortalProfileRouteImport } from './routes/_authenticated/portal.profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +81,36 @@ const AuthenticatedTenantsRoute = AuthenticatedTenantsRouteImport.update({
   path: '/tenants',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPortalIndexRoute =
+  AuthenticatedPortalIndexRouteImport.update({
+    id: '/portal/',
+    path: '/portal/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalMaintenanceRoute =
+  AuthenticatedPortalMaintenanceRouteImport.update({
+    id: '/portal/maintenance',
+    path: '/portal/maintenance',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalNoticesRoute =
+  AuthenticatedPortalNoticesRouteImport.update({
+    id: '/portal/notices',
+    path: '/portal/notices',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalPaymentsRoute =
+  AuthenticatedPortalPaymentsRouteImport.update({
+    id: '/portal/payments',
+    path: '/portal/payments',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPortalProfileRoute =
+  AuthenticatedPortalProfileRouteImport.update({
+    id: '/portal/profile',
+    path: '/portal/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -88,6 +123,11 @@ export interface FileRoutesByFullPath {
   '/reports': typeof AuthenticatedReportsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tenants': typeof AuthenticatedTenantsRoute
+  '/portal/maintenance': typeof AuthenticatedPortalMaintenanceRoute
+  '/portal/notices': typeof AuthenticatedPortalNoticesRoute
+  '/portal/payments': typeof AuthenticatedPortalPaymentsRoute
+  '/portal/profile': typeof AuthenticatedPortalProfileRoute
+  '/portal/': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -100,6 +140,11 @@ export interface FileRoutesByTo {
   '/reports': typeof AuthenticatedReportsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tenants': typeof AuthenticatedTenantsRoute
+  '/portal/maintenance': typeof AuthenticatedPortalMaintenanceRoute
+  '/portal/notices': typeof AuthenticatedPortalNoticesRoute
+  '/portal/payments': typeof AuthenticatedPortalPaymentsRoute
+  '/portal/profile': typeof AuthenticatedPortalProfileRoute
+  '/portal': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -114,6 +159,11 @@ export interface FileRoutesById {
   '/_authenticated/reports': typeof AuthenticatedReportsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/tenants': typeof AuthenticatedTenantsRoute
+  '/_authenticated/portal/maintenance': typeof AuthenticatedPortalMaintenanceRoute
+  '/_authenticated/portal/notices': typeof AuthenticatedPortalNoticesRoute
+  '/_authenticated/portal/payments': typeof AuthenticatedPortalPaymentsRoute
+  '/_authenticated/portal/profile': typeof AuthenticatedPortalProfileRoute
+  '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -128,6 +178,11 @@ export interface FileRouteTypes {
     | '/reports'
     | '/settings'
     | '/tenants'
+    | '/portal/maintenance'
+    | '/portal/notices'
+    | '/portal/payments'
+    | '/portal/profile'
+    | '/portal/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -140,6 +195,11 @@ export interface FileRouteTypes {
     | '/reports'
     | '/settings'
     | '/tenants'
+    | '/portal/maintenance'
+    | '/portal/notices'
+    | '/portal/payments'
+    | '/portal/profile'
+    | '/portal'
   id:
     | '__root__'
     | '/'
@@ -153,6 +213,11 @@ export interface FileRouteTypes {
     | '/_authenticated/reports'
     | '/_authenticated/settings'
     | '/_authenticated/tenants'
+    | '/_authenticated/portal/maintenance'
+    | '/_authenticated/portal/notices'
+    | '/_authenticated/portal/payments'
+    | '/_authenticated/portal/profile'
+    | '/_authenticated/portal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -239,6 +304,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTenantsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/portal/': {
+      id: '/_authenticated/portal/'
+      path: '/portal'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof AuthenticatedPortalIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/maintenance': {
+      id: '/_authenticated/portal/maintenance'
+      path: '/portal/maintenance'
+      fullPath: '/portal/maintenance'
+      preLoaderRoute: typeof AuthenticatedPortalMaintenanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/notices': {
+      id: '/_authenticated/portal/notices'
+      path: '/portal/notices'
+      fullPath: '/portal/notices'
+      preLoaderRoute: typeof AuthenticatedPortalNoticesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/payments': {
+      id: '/_authenticated/portal/payments'
+      path: '/portal/payments'
+      fullPath: '/portal/payments'
+      preLoaderRoute: typeof AuthenticatedPortalPaymentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/profile': {
+      id: '/_authenticated/portal/profile'
+      path: '/portal/profile'
+      fullPath: '/portal/profile'
+      preLoaderRoute: typeof AuthenticatedPortalProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -252,6 +352,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTenantsRoute: typeof AuthenticatedTenantsRoute
+  AuthenticatedPortalMaintenanceRoute: typeof AuthenticatedPortalMaintenanceRoute
+  AuthenticatedPortalNoticesRoute: typeof AuthenticatedPortalNoticesRoute
+  AuthenticatedPortalPaymentsRoute: typeof AuthenticatedPortalPaymentsRoute
+  AuthenticatedPortalProfileRoute: typeof AuthenticatedPortalProfileRoute
+  AuthenticatedPortalIndexRoute: typeof AuthenticatedPortalIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -264,6 +369,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTenantsRoute: AuthenticatedTenantsRoute,
+  AuthenticatedPortalMaintenanceRoute: AuthenticatedPortalMaintenanceRoute,
+  AuthenticatedPortalNoticesRoute: AuthenticatedPortalNoticesRoute,
+  AuthenticatedPortalPaymentsRoute: AuthenticatedPortalPaymentsRoute,
+  AuthenticatedPortalProfileRoute: AuthenticatedPortalProfileRoute,
+  AuthenticatedPortalIndexRoute: AuthenticatedPortalIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
