@@ -45,14 +45,14 @@ function ReportsPage() {
   const series = Object.values(
     all.reduce<Record<string, { key: string; month: string; expected: number; collected: number }>>(
       (acc, r) => {
-        acc[r.billing_month] ??= {
+        const bucket = (acc[r.billing_month] ??= {
           key: r.billing_month,
           month: formatMonthShort(r.billing_month),
           expected: 0,
           collected: 0,
-        };
-        acc[r.billing_month].expected += Number(r.total_amount);
-        acc[r.billing_month].collected += Number(r.paid_amount);
+        });
+        bucket.expected += Number(r.total_amount);
+        bucket.collected += Number(r.paid_amount);
         return acc;
       },
       {},

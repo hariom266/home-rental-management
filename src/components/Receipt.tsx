@@ -17,7 +17,7 @@ export function Receipt({
   onClose,
 }: {
   payment: Payment | null;
-  settings?: BuildingSettings;
+  settings: BuildingSettings | undefined;
   onClose: () => void;
 }) {
   return (
