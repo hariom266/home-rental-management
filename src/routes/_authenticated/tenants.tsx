@@ -40,7 +40,7 @@ import {
 export const Route = createFileRoute("/_authenticated/tenants")({
   head: () => ({
     meta: [
-      { title: "Tenants — HomeRent Manager" },
+      { title: "Tenants — Malti’s Rental Manager" },
       { name: "description", content: "Tenant records, apartment assignment and portal logins." },
     ],
   }),

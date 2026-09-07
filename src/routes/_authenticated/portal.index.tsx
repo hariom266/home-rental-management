@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/_authenticated/portal/")({
   head: () => ({
     meta: [
-      { title: "My Home — HomeRent Manager" },
+      { title: "My Home — Malti’s Rental Manager" },
       { name: "description", content: "Your apartment, rent due and building notices." },
     ],
   }),

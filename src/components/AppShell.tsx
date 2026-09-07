@@ -66,7 +66,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Building2 className="size-5" />
         </span>
         <div className="leading-tight">
-          <p className="text-sm font-bold">HomeRent</p>
+          <p className="text-sm font-bold">Malti’s Rental</p>
           <p className="text-xs text-sidebar-foreground/60">
             {role === "admin" ? "Owner console" : "Tenant portal"}
           </p>
@@ -139,7 +139,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Button variant="ghost" size="icon" onClick={() => setOpen(true)} aria-label="Open navigation">
             <Menu className="size-5" />
           </Button>
-          <span className="font-semibold">HomeRent Manager</span>
+          <span className="font-semibold">Malti’s Rental Manager</span>
         </header>
         <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:py-10">{children}</main>
       </div>

@@ -14,13 +14,13 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HomeRent Manager — Private 15-Apartment Rental Console" },
+      { title: "Malti’s Rental Manager — Private 15-Apartment Rental Console" },
       {
         name: "description",
         content:
           "Private rental management for a single 15-apartment building: rent tracking, receipts, maintenance requests and notices for the owner and every tenant.",
       },
-      { property: "og:title", content: "HomeRent Manager — Private Rental Console" },
+      { property: "og:title", content: "Malti’s Rental Manager — Private Rental Console" },
       {
         property: "og:description",
         content:
@@ -69,7 +69,7 @@ function LandingPage() {
             <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Building2 className="size-5" />
             </span>
-            <span className="font-bold">HomeRent Manager</span>
+            <span className="font-bold">Malti’s Rental Manager</span>
           </div>
           {loading ? null : signedIn ? (
             <Button asChild size="sm">
@@ -149,7 +149,7 @@ function LandingPage() {
 
       <footer className="border-t">
         <div className="mx-auto max-w-6xl px-5 py-6 text-xs text-muted-foreground">
-          HomeRent Manager — private rental management for a single residential building.
+          Malti’s Rental Manager — private rental management for a single residential building.
         </div>
       </footer>
     </div>

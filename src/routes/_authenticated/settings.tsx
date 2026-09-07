@@ -21,7 +21,7 @@ import {
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
     meta: [
-      { title: "Building Settings — HomeRent Manager" },
+      { title: "Building Settings — Malti’s Rental Manager" },
       { name: "description", content: "Building details, rent due day and late fee rules." },
     ],
   }),

@@ -30,7 +30,7 @@ export function Receipt({
           <div id="receipt-printable" className="rounded-xl border p-5 text-sm">
             <div className="flex items-start justify-between gap-4 border-b pb-4">
               <div>
-                <p className="text-base font-bold">{settings?.building_name ?? "HomeRent"}</p>
+                <p className="text-base font-bold">{settings?.building_name ?? "Malti’s Rental"}</p>
                 <p className="text-xs text-muted-foreground">{settings?.building_address}</p>
               </div>
               <div className="text-right">

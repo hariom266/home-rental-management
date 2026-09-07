@@ -12,13 +12,13 @@ export const Route = createFileRoute("/forgot-password")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Reset your password — HomeRent Manager" },
+      { title: "Reset your password — Malti’s Rental Manager" },
       {
         name: "description",
         content:
-          "Request a password reset link for your HomeRent Manager owner or tenant account.",
+          "Request a password reset link for your Malti’s Rental Manager owner or tenant account.",
       },
-      { property: "og:title", content: "Reset your password — HomeRent Manager" },
+      { property: "og:title", content: "Reset your password — Malti’s Rental Manager" },
       {
         property: "og:description",
         content: "Request a password reset link for your rental portal account.",
