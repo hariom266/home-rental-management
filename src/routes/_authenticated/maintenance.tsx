@@ -29,7 +29,7 @@ import {
 export const Route = createFileRoute("/_authenticated/maintenance")({
   head: () => ({
     meta: [
-      { title: "Maintenance — HomeRent Manager" },
+      { title: "Maintenance — Malti’s Rental Manager" },
       { name: "description", content: "Track and resolve tenant maintenance requests." },
     ],
   }),

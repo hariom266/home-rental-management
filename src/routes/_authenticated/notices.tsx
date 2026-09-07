@@ -30,7 +30,7 @@ import {
 export const Route = createFileRoute("/_authenticated/notices")({
   head: () => ({
     meta: [
-      { title: "Notices — HomeRent Manager" },
+      { title: "Notices — Malti’s Rental Manager" },
       { name: "description", content: "Publish building-wide or per-apartment notices." },
     ],
   }),

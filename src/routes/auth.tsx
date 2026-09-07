@@ -16,13 +16,13 @@ export const Route = createFileRoute("/auth")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Sign in — HomeRent Manager" },
+      { title: "Sign in — Malti’s Rental Manager" },
       {
         name: "description",
         content:
           "Secure sign-in for the building owner and tenants of a private 15-apartment residential building.",
       },
-      { property: "og:title", content: "Sign in — HomeRent Manager" },
+      { property: "og:title", content: "Sign in — Malti’s Rental Manager" },
       {
         property: "og:description",
         content: "Private rental management portal for owners and tenants.",
@@ -85,7 +85,7 @@ function SignInPage() {
           <span className="flex size-10 items-center justify-center rounded-xl bg-white/15">
             <Building2 className="size-5" />
           </span>
-          <span className="text-lg font-bold">HomeRent Manager</span>
+          <span className="text-lg font-bold">Malti’s Rental Manager</span>
         </Link>
         <div className="max-w-md">
           <h2 className="text-3xl font-bold leading-tight">

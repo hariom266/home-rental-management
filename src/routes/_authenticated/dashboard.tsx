@@ -29,7 +29,7 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Owner Dashboard — HomeRent Manager" },
+      { title: "Owner Dashboard — Malti’s Rental Manager" },
       { name: "description", content: "Occupancy, rent collection and maintenance at a glance." },
     ],
   }),

@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/_authenticated/portal/profile")({
   head: () => ({
     meta: [
-      { title: "My Profile — HomeRent Manager" },
+      { title: "My Profile — Malti’s Rental Manager" },
       { name: "description", content: "Update your contact details and change your password." },
     ],
   }),

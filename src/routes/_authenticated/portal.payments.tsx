@@ -24,7 +24,7 @@ import {
 export const Route = createFileRoute("/_authenticated/portal/payments")({
   head: () => ({
     meta: [
-      { title: "Rent & Payments — HomeRent Manager" },
+      { title: "Rent & Payments — Malti’s Rental Manager" },
       { name: "description", content: "Pay your rent and download past receipts." },
     ],
   }),

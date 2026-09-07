@@ -21,7 +21,7 @@ import {
 export const Route = createFileRoute("/_authenticated/payments")({
   head: () => ({
     meta: [
-      { title: "Payments — HomeRent Manager" },
+      { title: "Payments — Malti’s Rental Manager" },
       { name: "description", content: "Every rent payment received, with printable receipts." },
     ],
   }),

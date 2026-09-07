@@ -42,7 +42,7 @@ import {
 export const Route = createFileRoute("/_authenticated/rent")({
   head: () => ({
     meta: [
-      { title: "Rent Records — HomeRent Manager" },
+      { title: "Rent Records — Malti’s Rental Manager" },
       { name: "description", content: "Generate monthly rent and track collection per apartment." },
     ],
   }),
