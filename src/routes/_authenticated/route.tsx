@@ -20,7 +20,7 @@ function AuthenticatedLayout() {
   useEffect(() => {
     if (loading) return;
     if (!session) {
-      navigate({ to: "/", replace: true });
+      navigate({ to: "/auth", replace: true });
       return;
     }
     if (role === "tenant" && !isTenantArea) {
