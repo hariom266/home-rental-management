@@ -1,160 +1,157 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
-import { Building2, Loader2, ShieldCheck } from "lucide-react";
-import { toast } from "sonner";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Building2,
+  CreditCard,
+  FileText,
+  Megaphone,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
 
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { resolveLoginEmail } from "@/lib/format";
-import { bootstrapDemoData } from "@/lib/demo.functions";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sign in — HomeRent Manager" },
+      { title: "HomeRent Manager — Private 15-Apartment Rental Console" },
       {
         name: "description",
         content:
-          "Secure sign-in for the building owner and tenants of a private 15-apartment residential building.",
+          "Private rental management for a single 15-apartment building: rent tracking, receipts, maintenance requests and notices for the owner and every tenant.",
       },
-      { property: "og:title", content: "Sign in — HomeRent Manager" },
+      { property: "og:title", content: "HomeRent Manager — Private Rental Console" },
       {
         property: "og:description",
-        content: "Private rental management portal for owners and tenants.",
+        content:
+          "Rent, receipts, maintenance and notices for a private 15-apartment residential building.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: SignInPage,
+  component: LandingPage,
 });
 
-function SignInPage() {
-  const { loading, session, role } = useAuth();
-  const navigate = useNavigate();
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
-  const [busy, setBusy] = useState(false);
-  const seed = useServerFn(bootstrapDemoData);
+const FEATURES = [
+  {
+    icon: <CreditCard className="size-5" />,
+    title: "Rent & payments",
+    body: "Monthly rent per apartment, part payments, late fees and outstanding balances at a glance.",
+  },
+  {
+    icon: <FileText className="size-5" />,
+    title: "Instant receipts",
+    body: "Every settled payment produces a numbered receipt tenants can view and print themselves.",
+  },
+  {
+    icon: <Wrench className="size-5" />,
+    title: "Maintenance requests",
+    body: "Tenants raise issues with priority; the owner tracks them from open to resolved.",
+  },
+  {
+    icon: <Megaphone className="size-5" />,
+    title: "Building notices",
+    body: "Publish announcements to the whole building or to one apartment only.",
+  },
+];
 
-  useEffect(() => {
-    if (loading || !session || !role) return;
-    navigate({ to: role === "admin" ? "/dashboard" : "/portal", replace: true });
-  }, [loading, session, role, navigate]);
-
-  async function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    setBusy(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: resolveLoginEmail(identifier),
-      password,
-    });
-    setBusy(false);
-    if (error) {
-      toast.error("Sign in failed", { description: error.message });
-      return;
-    }
-    toast.success("Welcome back");
-  }
-
-  async function handleSeed() {
-    setBusy(true);
-    try {
-      const result = await seed({});
-      toast.success(result.created ? "Demo data created" : "Demo data already present", {
-        description: "Sign in as admin@homerent.local / Admin@12345",
-      });
-    } catch (error) {
-      toast.error("Could not create demo data", {
-        description: error instanceof Error ? error.message : "Unknown error",
-      });
-    } finally {
-      setBusy(false);
-    }
-  }
+function LandingPage() {
+  const { session, role, loading } = useAuth();
+  const signedIn = Boolean(session && role);
+  const homeTo = role === "admin" ? "/dashboard" : "/portal";
 
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="relative hidden flex-col justify-between bg-brand-gradient p-12 text-primary-foreground lg:flex">
-        <div className="flex items-center gap-3">
-          <span className="flex size-10 items-center justify-center rounded-xl bg-white/15">
-            <Building2 className="size-5" />
-          </span>
-          <span className="text-lg font-bold">HomeRent Manager</span>
-        </div>
-        <div className="max-w-md">
-          <h2 className="text-3xl font-bold leading-tight">
-            One private console for all 15 apartments.
-          </h2>
-          <p className="mt-4 text-sm text-primary-foreground/80">
-            Track rent, record payments, issue receipts, resolve maintenance requests and publish
-            notices — with tenants seeing only their own home.
-          </p>
-        </div>
-        <p className="flex items-center gap-2 text-xs text-primary-foreground/70">
-          <ShieldCheck className="size-4" /> Private building software. Access is invitation only.
-        </p>
-      </div>
-
-      <div className="flex items-center justify-center px-5 py-12">
-        <div className="w-full max-w-sm">
-          <div className="mb-8 lg:hidden">
-            <span className="flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+    <div className="min-h-screen bg-background">
+      <header className="border-b">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+          <div className="flex items-center gap-3">
+            <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Building2 className="size-5" />
             </span>
+            <span className="font-bold">HomeRent Manager</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Sign in</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Tenants use their Apartment ID (e.g. APT-007). Owners use their email address.
-          </p>
-
-          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="identifier">Apartment ID or email</Label>
-              <Input
-                id="identifier"
-                autoComplete="username"
-                placeholder="APT-007"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full" disabled={busy}>
-              {busy ? <Loader2 className="size-4 animate-spin" /> : "Sign in"}
+          {loading ? null : signedIn ? (
+            <Button asChild size="sm">
+              <Link to={homeTo}>{role === "admin" ? "Owner console" : "My portal"}</Link>
             </Button>
-          </form>
-
-          <div className="mt-8 rounded-xl border bg-card p-4 text-sm shadow-card">
-            <p className="font-semibold">First run?</p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Create the demo building: one owner account, 15 tenants and four months of rent
-              history.
-            </p>
-            <Button variant="outline" size="sm" className="mt-3" onClick={handleSeed} disabled={busy}>
-              Create demo data
+          ) : (
+            <Button asChild size="sm">
+              <Link to="/auth">Sign in</Link>
             </Button>
-            <p className="mt-3 text-xs text-muted-foreground">
-              Owner: <code>admin@homerent.local</code> / <code>Admin@12345</code>
-              <br />
-              Tenant: <code>APT-001</code> / <code>Tenant@12345</code>
-            </p>
-          </div>
+          )}
         </div>
-      </div>
+      </header>
+
+      <main>
+        <section className="bg-brand-gradient text-primary-foreground">
+          <div className="mx-auto max-w-6xl px-5 py-20">
+            <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-primary-foreground/80">
+              <ShieldCheck className="size-4" /> Private building software
+            </p>
+            <h1 className="mt-4 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">
+              One calm console for all 15 apartments.
+            </h1>
+            <p className="mt-5 max-w-xl text-primary-foreground/85">
+              The owner sees the whole building — rent collected, dues, requests and notices.
+              Each tenant sees only their own home, payments and receipts.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg" variant="secondary">
+                <Link to={signedIn ? homeTo : "/auth"}>
+                  {signedIn ? "Continue" : "Sign in to your account"}
+                </Link>
+              </Button>
+              {!signedIn && (
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-white/40 bg-transparent text-primary-foreground hover:bg-white/10"
+                >
+                  <Link to="/forgot-password">Forgot password?</Link>
+                </Button>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-5 py-16">
+          <h2 className="text-2xl font-bold tracking-tight">What it handles</h2>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURES.map((f) => (
+              <div key={f.title} className="rounded-xl border bg-card p-5 shadow-card">
+                <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  {f.icon}
+                </span>
+                <h3 className="mt-4 font-semibold">{f.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="border-t bg-muted/40">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-12 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-xl font-bold tracking-tight">Access is invitation only</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Tenant accounts are created by the building owner. Tenants sign in with their
+                Apartment ID, owners with their email address.
+              </p>
+            </div>
+            <Button asChild>
+              <Link to="/auth">Go to sign in</Link>
+            </Button>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t">
+        <div className="mx-auto max-w-6xl px-5 py-6 text-xs text-muted-foreground">
+          HomeRent Manager — private rental management for a single residential building.
+        </div>
+      </footer>
     </div>
   );
 }
